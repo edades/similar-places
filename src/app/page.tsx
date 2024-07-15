@@ -1,6 +1,7 @@
 'use client'
 import Location from './components/Location';
 import ImageLoader from './components/ImageLoader';
+import { Toaster } from 'sonner';
 import { usePlaceStore } from './store';
 import Image from 'next/image'
 import Results from './components/Results';
@@ -18,6 +19,7 @@ export default function Home() {
     />
     }
     <main className='container mx-auto w-9/12 text-zinc-300 py-6'>
+      <Toaster richColors position="top-center"/>
       <h1 className="text-5xl font-bold text-center mb-6 drop-shadow-xl">Similar places AI</h1>
       <ImageLoader />
       <Location />

@@ -1,8 +1,10 @@
 'use client'
-import { useDropzone } from 'react-dropzone-esm';
+import { FileRejection, useDropzone } from 'react-dropzone-esm';
+import { UploadSimple } from "@phosphor-icons/react";
 import Image from 'next/image'
 import { toBase64 } from '../utils';
 import { usePlaceStore } from "../store";
+import { toast } from 'sonner';
 
 const ImageLoader = () => {
   const image = usePlaceStore((state) => state.image)
@@ -13,15 +15,29 @@ const ImageLoader = () => {
     setImage(img)
   }
 
-  const { getRootProps, getInputProps } = useDropzone({ maxFiles: 1, multiple: false, maxSize: 4000000, onDrop: onDropImage });
+  const onRejectedImage = (files: FileRejection[]) => {
+    const { errors } = files[0]
+    const error = errors[0]
+    if (error.code === 'file-too-large') {
+      toast.error('File too large - Max 4 Mb')
+    }
+  }
+
+  const { getRootProps, getInputProps } = useDropzone({ maxFiles: 1, multiple: false, maxSize: 4000000, onDrop: onDropImage, onDropRejected: onRejectedImage, accept: {
+    'image/jpeg': [],
+    'image/png': []
+  } });
   return (
     <section className="container">
-      <h2 className='text-xl mb-2 font-medium drop-shadow-xl shadow-2xl'>Step 1 - Upload an image with a visible background to analize</h2>
-      <div className='flex md:flex-row flex-col gap-4'>
-        <div {...getRootProps({className: 'w-full bg-transparent px-5 py-3 md:px-10 md:py-6 text-gray-500 border-dotted border-4 border-green-400 h-20 drop-shadow-xl hover:bg-green-900 cursor-pointer'})}>
+      <div className='flex items-center gap-4 mb-4'>
+      <h2 className='text-xl mb-2 font-medium'>1- Upload an image</h2>
+        <div {...getRootProps({ className: 'border-2 border-green-400 bg-slate-900 rounded py-2 px-2 hover:bg-green-900 bg-transparent px-1 py-1 text-gray-500 hover:bg-green-900 cursor-pointer flex flex-col items-center justify-center text-center size-16' })}>
           <input {...getInputProps()} />
-          <p className='drop-shadow-xl text-slate-400 shadow-2xl'>Drag and drop a picture, or click to select files</p>
+          <UploadSimple size={32} color="white"/>
+          {/* <p className='text-slate-400 hidden md:block'>Select a picture</p> */}
         </div>
+      </div>
+      <div className='flex w-full justify-center'>
         <Image src={image} alt="" width={200} height={200}/>
       </div>
     </section>

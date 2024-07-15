@@ -1,7 +1,7 @@
 import { usePlaceStore } from "../store";
+import { toast } from 'sonner';
 
 const useLocations = () => {
-  const location = usePlaceStore((state) => state.location)
   const setLocation = usePlaceStore((state) => state.setLocation)
 
   const getMyLocation = () => {
@@ -18,16 +18,15 @@ const useLocations = () => {
         lat: latitude,
         lng: longitude
       })
+      toast.success('Using your current location')
     }    
     const error = (err: GeolocationPositionError) => {
       console.warn(`ERROR(${err.code}): ${err.message}`);
-      alert('There was an error locating you, pleas try writing an address')
+      toast.error('There was an error locating you, please try writing an address')
     }
     
     navigator.geolocation.getCurrentPosition(success, error, options);
   }
-  console.log('===Coords: ', location)
-
 
   const onPlaceSelect: (selectedPlace: google.maps.places.PlaceResult | null) => void =
     (selectedPlace: google.maps.places.PlaceResult | null) => {

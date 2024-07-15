@@ -9,11 +9,13 @@ export type Place = {
 export type State = {
   image: string
   location: Place
+  isLoading: boolean
 }
 
 interface Action {
   setLocation: (location: Place) => void;
-  setImage: (image: string) => void;
+  setImage: (image: string) => void
+  setLoading: (isLoading: boolean) => void;
 }
 
 export const usePlaceStore = create<State & Action>((set) => ({
@@ -23,7 +25,9 @@ export const usePlaceStore = create<State & Action>((set) => ({
     lat: 0,
     lng: 0
   },
+  isLoading: false,
 
   setLocation: (location) => set(() => ({ location })),
   setImage: (image) => set(() => ({ image })),
+  setLoading: (isLoading) => set(() => ({ isLoading })),
 }));

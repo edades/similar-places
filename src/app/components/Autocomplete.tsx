@@ -32,24 +32,13 @@ const Autocomplete = ({ onSelect } : { onSelect: (place: google.maps.places.Plac
   }, [onSelect, placeAutocomplete]);
 
   useEffect(() => {
-    console.log('cambia la ubicacion')
     if (inputRef.current && hasCurrentLocation) {
       inputRef.current.value = ""
     }
   }, [location.title, hasCurrentLocation])
 
-  const CurrentLocationData = () => (
-    <div>
-      <p>Using your current location:</p>
-      <p>Latitude: {location.lat}</p>
-      <p>Longitude: {location.lng}</p>
-    </div>
-  )
   return (
-    <div>
-      <input ref={inputRef} placeholder="Enter a place or address" className="w-full mt-3 mb-0 h-10 px-4 text-black" />
-      {hasCurrentLocation && <CurrentLocationData />}
-    </div>
+    <input ref={inputRef} placeholder={hasCurrentLocation ? 'Using your current location' : 'Enter a place or address'} className="w-full mt-3 mb-0 h-12 px-4 text-black" />
   );
 }
 
