@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 LIVE URL: https://similar-places.vercel.app/
 
+![Captura de pantalla 2024-07-16 153106](https://github.com/user-attachments/assets/bbb0fe74-94b9-4cf5-b7a6-6b604f2251c0)
+
 ## Getting Started
 
 Create a .env file with the following variables
