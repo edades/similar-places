@@ -44,7 +44,7 @@ const Results = () => {
         {
           role: 'user',
           content: [
-            { type: 'text', text: 'Analiza la imagen, especialmente el fondo para encontrar los elementos principales para luego utilizarlos para encontrar lugares similares' },
+            { type: 'text', text: 'Analiza la imagen, especialmente el fondo para encontrar los elementos principales para luego utilizarlos para encontrar lugares similares, dame los resultados en ingles' },
             {
               type: 'image',
               image: image,
