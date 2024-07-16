@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Similar Places AI",
+  title: "Similar Places AI - Vercel Hackathon",
   description: "Find similar places using the AI",
 };
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-none w-full max-h-svh`}>{children}</body>
+      <body className={`${inter.className} bg-none w-full`}>{children}</body>
     </html>
   );
 }
