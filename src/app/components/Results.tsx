@@ -36,7 +36,8 @@ const Results = () => {
         hasNearbyPlaces: z.boolean().describe(`es un booleano que dice si cerca de ${userLocation} hay lugares que cumplan que coincidan completamente con los elementos del fondo de la imagen, por favor intenta ser estricto`),
         tips: z.object({
           date: z.string().describe('contiene una recomendación breve de cual es la mejor fecha o epoca para visitar este tipo de lugares'),
-          toDo: z.array(z.string()).describe('contiene una lista de string con nombre de actividades recomendadas para hacer en este tipo de lugares')
+          toDo: z.array(z.string()).describe('contiene una lista de string con nombre de actividades recomendadas para hacer en este tipo de lugares'),
+          recomendations: z.array(z.string()).describe('contiene una lista de recomendaciones para llevar para ese tipo de lugares, considerando ropa, clima, caminos, etc')
         })
       }),
       mode: 'json',
@@ -100,6 +101,11 @@ const Results = () => {
             <p><b>Things to do:</b> </p>
             <ul>
               {results.tips.toDo.map((item: string) => <p key={item}> - {item}</p>)}
+            </ul>
+            <br />
+            <p><b>Recomendations: </b></p>
+            <ul>
+              {results.tips.recomendations.map((item: string) => <p key={item}> - {item}</p>)}
             </ul>
           </div>
         )
